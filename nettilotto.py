@@ -6,6 +6,11 @@ def arvo_numerot():
     return set(arvotut), lisanumero
 
 def tarkista_voitto(pelaajan_numerot, arvotut_numerot, lisanumero, panos):
+    pelaajan_numerot = set(map(int, pelaajan_numerot.split()))
+    arvotut_numerot = set(map(int, arvotut_numerot.split()))
+    lisanumero = int(lisanumero)
+    panos = float(panos)
+
     oikein = len(pelaajan_numerot & arvotut_numerot)
     osui_lisanumeroon = lisanumero in pelaajan_numerot
     
@@ -21,6 +26,14 @@ def tarkista_voitto(pelaajan_numerot, arvotut_numerot, lisanumero, panos):
     
     voitto = voitot.get((oikein, osui_lisanumeroon), 0) * panos
     return voitto
+
+# Luokka Robot Frameworkia varten
+class NettiLotto:
+    def tarkista_voitto(self, pelaajan_numerot, arvotut_numerot, lisanumero, panos):
+        return tarkista_voitto(pelaajan_numerot, arvotut_numerot, lisanumero, panos)
+
+
+
 
 def pelaa_lotto():
     raha = 10.0
